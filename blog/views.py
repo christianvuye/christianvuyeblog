@@ -20,7 +20,7 @@ def blog_category(request, slug):
     return render(request, "blog/category.html", context) 
 
 def blog_detail(request, pk):
-    post = Post.objects.get(pk=pk)
+    post = get_object_or_404(Post, pk=pk)
     form = CommentForm()
     if request.method == "POST":
         form = CommentForm(request.POST)
@@ -37,6 +37,6 @@ def blog_detail(request, pk):
     context = {
         "post": post,
         "comments": comments,
-        "form": CommentForm(),
+        "form": form, # use existing form variable here instead of creating new CommentForm() instance
     }
     return render(request, "blog/detail.html", context)
