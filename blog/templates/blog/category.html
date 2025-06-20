@@ -1,5 +1,24 @@
 {% extends "blog/index.html" %}
 
-{% block page_title %}
-<h2>{{ category }}</h2>
-{% endblock page_title %}
+{% block page_content %}
+    <div style="margin-bottom: 3rem;">
+        <h2 style="margin: 0 0 0.5rem 0; font-size: 1.3rem; font-weight: 600; color: var(--text);">{{ category }}</h2>
+        <p style="margin: 0 0 2rem 0; font-size: 0.9rem; color: var(--text-light);">Posts in this category</p>
+        
+        <ul style="list-style: none; padding: 0; margin: 0;">
+            {% for post in posts %}
+                <li style="margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(128, 128, 128, 0.1);">
+                    <span style="display: block; margin-bottom: 0.5rem; font-size: 0.8rem; color: var(--text-light);">{{ post.created_on|date:"F j, Y" }}</span>
+                    <h3 style="margin: 0 0 0.3rem 0; font-size: 1.1rem; font-weight: 600;">
+                        <a href="{% url 'blog_detail' post.pk %}" style="color: var(--text); text-decoration: none;">{{ post.title }}</a>
+                    </h3>
+                    <p style="margin: 0; line-height: 1.5; color: var(--text-light); font-size: 0.9rem;">{{ post.body | slice:":150" }}...</p>
+                </li>
+            {% empty %}
+                <li>
+                    <p style="color: var(--text-light); font-style: italic;">No posts in this category yet.</p>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock page_content %}

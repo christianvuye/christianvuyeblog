@@ -1,39 +1,166 @@
 {% extends "base.html" %}
 
 {% block page_title %}
-    <h2>{{ post.title }}</h2>
+    <style>
+        .post-header {
+            margin-bottom: 3rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+        }
+
+        .post-date {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .post-title {
+            margin: 0 0 0.3rem 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .post-categories {
+            margin-bottom: 1.5rem;
+        }
+
+        .category-tag {
+            background: var(--accent-bg);
+            color: var(--accent);
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            text-decoration: none;
+            font-size: 0.75rem;
+            margin-right: 0.5rem;
+            display: inline-block;
+        }
+
+        .category-tag:hover {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        .post-content {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: var(--text-light);
+        }
+
+        .comments-section {
+            margin-bottom: 3rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+        }
+
+        .section-title {
+            margin: 0 0 1.5rem 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .comment-form {
+            margin-bottom: 3rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .submit-btn {
+            background: var(--accent);
+            color: var(--bg);
+            padding: 0.6rem 1.2rem;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .comment {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+        }
+
+        .comment:not(:last-child) {
+            border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+        }
+
+        .comment-date {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .comment-author {
+            margin: 0 0 0.3rem 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .comment-body {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: var(--text-light);
+        }
+
+        .no-comments {
+            color: var(--text-light);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+    </style>
 {% endblock page_title %}
 
 {% block page_content %}
-    <small>
-        {{ post.created_on.date }} | Categories:
-        {% for category in post.categories.all %}
-            <a href="{% url 'blog_category' category.slug %}">
-                {{ category.name }}
-            </a>
+    <article class="post-header">
+        <span class="post-date">{{ post.created_on|date:"F j, Y" }}</span>
+        <h1 class="post-title">{{ post.title }}</h1>
+        
+        {% if post.categories.all %}
+            <div class="post-categories">
+                {% for category in post.categories.all %}
+                    <a href="{% url 'blog_category' category.slug %}" class="category-tag">{{ category.name }}</a>
+                {% endfor %}
+            </div>
+        {% endif %}
+        
+        <div class="post-content">
+            {{ post.body | linebreaks }}
+        </div>
+    </article>
+
+    <section class="comments-section">
+        <h3 class="section-title">Leave a comment</h3>
+        
+        <form method="post" class="comment-form">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.author }}
+            </div>
+            <div class="form-group">
+                {{ form.body }}
+            </div>
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+    </section>
+
+    <section>
+        <h3 class="section-title">Comments</h3>
+        {% for comment in comments %}
+            <div class="comment">
+                <span class="comment-date">{{ comment.created_on|date:"F j, Y" }}</span>
+                <h4 class="comment-author">{{ comment.author }}</h4>
+                <div class="comment-body">
+                    {{ comment.body | linebreaks }}
+                </div>
+            </div>
+        {% empty %}
+            <p class="no-comments">No comments yet. Be the first to comment!</p>
         {% endfor %}
-    </small>
-    <p>{{ post.body | linebreaks }}</p>
-
-    <h3>Leave a comment:</h3>
-    <form method="post">
-        {% csrf_token %}
-        <div>
-            {{ form.author }}
-        </div>
-        <div>
-            {{ form.body }}
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-
-    <h3>Comments:</h3>
-    {% for comment in comments %}
-        <p>
-            On {{ comment.created_on.date }} <b>{{ comment.author }}</b> wrote:
-        </p>
-        <p>
-            {{ comment.body | linebreaks }}
-        </p>
-    {% endfor %}
+    </section>
 {% endblock page_content %}

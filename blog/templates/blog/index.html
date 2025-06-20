@@ -1,22 +1,101 @@
 {% extends "base.html" %}
 
 {% block page_title %}
-    <h2>Blog Posts</h2>
+    <style>
+        .posts-section {
+            margin-bottom: 3rem;
+        }
+
+        .posts-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .post-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+        }
+
+        .post-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .post-date {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .post-title {
+            margin: 0 0 0.3rem 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .post-title a {
+            text-decoration: none;
+            color: var(--accent);
+        }
+
+        .post-title a:hover {
+            text-decoration: underline;
+        }
+
+        .post-categories {
+            margin-bottom: 0.5rem;
+        }
+
+        .category-tag {
+            background: var(--accent-bg);
+            color: var(--accent);
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            text-decoration: none;
+            font-size: 0.75rem;
+            margin-right: 0.5rem;
+            display: inline-block;
+        }
+
+        .category-tag:hover {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        .post-description {
+            margin: 0;
+            line-height: 1.5;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+    </style>
 {% endblock page_title %}
 
 {% block page_content %}
     {% block posts %}
-        {% for post in posts %}
-            <h3><a href="{% url 'blog_detail' post.pk %}">{{ post.title }}</a></h3>
-            <small>
-                {{ post.created_on.date }} | Categories:
-                {% for category in post.categories.all %}
-                    <a href="{% url 'blog_category' category.slug %}">
-                        {{ category.name }}
-                    </a>
+        <div class="posts-section">
+            <ul class="posts-list">
+                {% for post in posts %}
+                    <li class="post-item">
+                        <span class="post-date">{{ post.created_on|date:"F j, Y" }}</span>
+                        <h3 class="post-title">
+                            <a href="{% url 'blog_detail' post.pk %}">{{ post.title }}</a>
+                        </h3>
+                        {% if post.categories.all %}
+                            <div class="post-categories">
+                                {% for category in post.categories.all %}
+                                    <a href="{% url 'blog_category' category.slug %}" class="category-tag">{{ category.name }}</a>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        <p class="post-description">{{ post.body | slice:":150" }}...</p>
+                    </li>
                 {% endfor %}
-            </small>
-            <p>{{ post.body | slice:":400" }}...</p>
-        {% endfor %}
+            </ul>
+        </div>
     {% endblock posts %}
 {% endblock page_content %}

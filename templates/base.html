@@ -4,13 +4,78 @@
     <meta charset="utf-8">
     <title>My Personal Blog</title>
     <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+    <style>
+        header {
+            padding: 0;
+            margin-bottom: 2rem;
+        }
+        
+        .site-title {
+            margin: 0 0 0.5rem 0;
+            color: var(--text);
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+        }
+        
+        .site-description {
+            margin: 0;
+            color: var(--text-light);
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            max-width: 600px;
+        }
+
+        .content-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1rem 0 1rem;
+        }
+        
+        .social-links {
+            margin-top: 4rem;
+            padding: 2rem 0;
+        }
+        
+        .social-links h3 {
+            margin: 0 0 1rem 0;
+            color: var(--text);
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            margin-right: 1.5rem;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent);
+        }
+    </style>
 </head>
 <body>
-<h1>Christian Vuye's Blog</h1>
-<hr>
-{% block page_title %}{% endblock page_title %}
-{% block page_content %}{% endblock page_content %}
-<hr>
-<a href="{% url "blog_index" %}">Home</a>
+    <div class="content-wrapper">
+        <header>
+            <h1 class="site-title">Stay Foolish</h1>
+            <p class="site-description">Fool at everything, expert at nothing</p>
+        </header>
+        
+        {% block page_title %}{% endblock page_title %}
+        {% block page_content %}{% endblock page_content %}
+        
+        <div class="social-links">
+            <h3>Connect</h3>
+            <a href="#">Twitter</a>
+            <a href="#">GitHub</a>
+            <a href="#">LinkedIn</a>
+            <a href="#">RSS</a>
+        </div>
+    </div>
 </body>
 </html>
