@@ -87,10 +87,13 @@
             <p class="site-description">Fool at everything, expert at nothing</p>
             <div class="page-nav">
                 <a href="{% url 'blog_index' %}" {% if request.resolver_match.url_name == 'blog_index' %}class="current"{% endif %}>
-                    {% if request.resolver_match.url_name == 'blog_about' %}← {% endif %}Writing
+                    {% if request.resolver_match.url_name == 'blog_roadmap' or request.resolver_match.url_name == 'blog_about' %}← {% endif %}Writing
+                </a> • 
+                <a href="{% url 'blog_roadmap' %}" {% if request.resolver_match.url_name == 'blog_roadmap' %}class="current"{% endif %}>
+                    {% if request.resolver_match.url_name == 'blog_index' %}→ {% endif %}Roadmap{% if request.resolver_match.url_name == 'blog_about' %} ←{% endif %}
                 </a> • 
                 <a href="{% url 'blog_about' %}" {% if request.resolver_match.url_name == 'blog_about' %}class="current"{% endif %}>
-                    About{% if request.resolver_match.url_name == 'blog_index' %} →{% endif %}
+                    {% if request.resolver_match.url_name == 'blog_index' or request.resolver_match.url_name == 'blog_roadmap' %}→ {% endif %}About
                 </a>
             </div>
         </header>

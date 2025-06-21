@@ -16,6 +16,15 @@ class Post(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
     categories = models.ManyToManyField("Category", related_name="posts")
+    page_type = models.CharField(
+        max_length=20,
+        choices=[
+            ('post', 'Regular Post'),
+            ('featured', 'Featured Post'),
+            ('navbar', 'Navigation Bar Post'),
+        ],
+        default='post'
+    )
     
     def __str__(self):
         return self.title
