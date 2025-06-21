@@ -1,0 +1,2 @@
+# This file ensures the backups directory is tracked in git
+# The actual backup files will be ignored via .gitignore

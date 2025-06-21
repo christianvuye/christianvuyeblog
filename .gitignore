@@ -131,6 +131,10 @@ dmypy.json
 # Django-specific
 media/
 staticfiles/
+backups/*.json
+backups/*.json.gz
+backups/*.sql
+!backups/.gitkeep
 
 # Local development settings
 .env.local
