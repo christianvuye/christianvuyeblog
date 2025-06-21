@@ -88,15 +88,15 @@
             <h1 class="site-title">Stay Foolish</h1>
             <p class="site-description">Fool at everything, expert at nothing</p>
             <div class="page-nav">
-                <a href="{% url 'blog_index' %}" {% if request.resolver_match.url_name == 'blog_index' %}class="current"{% endif %}>
-                    {% if request.resolver_match.url_name != 'blog_index' %}← {% endif %}Writing
-                </a> • 
+                <a href="{% url 'blog_index' %}" {% if request.resolver_match.url_name == 'blog_index' or request.resolver_match.url_name == 'blog_detail' or request.resolver_match.url_name == 'blog_category' %}class="current"{% endif %}>
+                    {% if request.resolver_match.url_name == 'blog_detail' or request.resolver_match.url_name == 'blog_category' %}← {% endif %}Writing{% if request.resolver_match.url_name == 'blog_roadmap' or request.resolver_match.url_name == 'blog_projects' or request.resolver_match.url_name == 'blog_about' %} ←{% endif %}
+                </a>
                 <a href="{% url 'blog_roadmap' %}" {% if request.resolver_match.url_name == 'blog_roadmap' %}class="current"{% endif %}>
-                    {% if request.resolver_match.url_name == 'blog_index' %}→ {% endif %}Roadmap{% if request.resolver_match.url_name != 'blog_index' and request.resolver_match.url_name != 'blog_roadmap' %} ←{% endif %}
-                </a> • 
+                    {% if request.resolver_match.url_name == 'blog_index' or request.resolver_match.url_name == 'blog_detail' or request.resolver_match.url_name == 'blog_category' %}→ {% endif %}Roadmap{% if request.resolver_match.url_name == 'blog_projects' or request.resolver_match.url_name == 'blog_about' %} ←{% endif %}
+                </a>
                 <a href="{% url 'blog_projects' %}" {% if request.resolver_match.url_name == 'blog_projects' %}class="current"{% endif %}>
-                    {% if request.resolver_match.url_name == 'blog_index' or request.resolver_match.url_name == 'blog_roadmap' %}→ {% endif %}Projects{% if request.resolver_match.url_name == 'blog_about' %} ←{% endif %}
-                </a> • 
+                    {% if request.resolver_match.url_name == 'blog_index' or request.resolver_match.url_name == 'blog_detail' or request.resolver_match.url_name == 'blog_category' or request.resolver_match.url_name == 'blog_roadmap' %}→ {% endif %}Projects{% if request.resolver_match.url_name == 'blog_about' %} ←{% endif %}
+                </a>
                 <a href="{% url 'blog_about' %}" {% if request.resolver_match.url_name == 'blog_about' %}class="current"{% endif %}>
                     {% if request.resolver_match.url_name != 'blog_about' %}→ {% endif %}About
                 </a>
