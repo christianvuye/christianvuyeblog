@@ -1,5 +1,6 @@
 asgiref==3.8.1
 Django==5.2.3
+django-ckeditor-5==0.2.15
 django-stubs==5.2.1
 django-stubs-ext==5.2.1
 mypy==1.16.1

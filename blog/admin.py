@@ -5,7 +5,10 @@ class CategoryAdmin(admin.ModelAdmin):
     pass
 
 class PostAdmin(admin.ModelAdmin):
-    pass
+    class Media:
+        css = {
+            'all': ('admin/css/ckeditor5-custom.css',)
+        }
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Post, PostAdmin)
