@@ -23,3 +23,6 @@ def blog_detail(request, pk):
         "post": post,
     }
     return render(request, "blog/detail.html", context)
+
+def about(request):
+    return render(request, "blog/about.html")

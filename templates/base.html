@@ -9,6 +9,27 @@
             padding: 0;
             margin-bottom: 2rem;
         }
+
+        .page-nav {
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .page-nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .page-nav a:hover {
+            color: var(--accent);
+        }
+
+        .page-nav a.current {
+            color: var(--text);
+            font-weight: 500;
+        }
         
         .site-title {
             margin: 0 0 0.5rem 0;
@@ -64,6 +85,14 @@
         <header>
             <h1 class="site-title">Stay Foolish</h1>
             <p class="site-description">Fool at everything, expert at nothing</p>
+            <div class="page-nav">
+                <a href="{% url 'blog_index' %}" {% if request.resolver_match.url_name == 'blog_index' %}class="current"{% endif %}>
+                    {% if request.resolver_match.url_name == 'blog_about' %}← {% endif %}Writing
+                </a> • 
+                <a href="{% url 'blog_about' %}" {% if request.resolver_match.url_name == 'blog_about' %}class="current"{% endif %}>
+                    About{% if request.resolver_match.url_name == 'blog_index' %} →{% endif %}
+                </a>
+            </div>
         </header>
         
         {% block page_title %}{% endblock page_title %}

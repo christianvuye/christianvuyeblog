@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+    <style>
+        .about-content {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--text-light);
+        }
+
+        .about-content h2 {
+            margin: 2.5rem 0 0.2rem 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .about-content h2:first-child {
+            margin-top: 0;
+        }
+
+        .about-content h2 + p {
+            margin-top: 0;
+        }
+
+        .about-content p + ul {
+            margin-top: 0.2rem;
+        }
+
+        .about-content p:has(+ ul) {
+            margin-bottom: 0.2rem;
+        }
+
+        .about-content p {
+            margin-bottom: 1.2rem;
+        }
+
+        .about-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .about-content ul {
+            margin: 1rem 0 1.5rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .about-content ul li {
+            margin-bottom: 0.4rem;
+        }
+
+        .about-content ul li:last-child {
+            margin-bottom: 0;
+        }
+
+        .social-links {
+            margin-top: 2rem;
+        }
+    </style>
+{% endblock page_title %}
+
+{% block page_content %}
+    <div class="about-content">
+    <h2>👋 About me</h2>
+        
+        <p>Hey — I'm Christian Vuye.</p>
+        
+        <p>I'm a builder, software developer, entrepreneur, fitness enthousiast, and eternal learner. But most importantly: I am curious and constantly looking to update my understanding of how the world I works. 
+            I build things with Python and Django, tinker with AI and data, and other times dive deep into the rabit hole on some esoteric topic. 
+            I've worked in games, freelanced for big names like Honda, co-founded multiple startups, and broken a sweat trying to outpace both burnout and automation.</p>
+        
+        <p>This blog, Stay Foolish, is where I write as a fool at everything and an expert at nothing. 
+            I don't claim authority — just curiosity.</p>
+        
+        <h2>🎯 Why "Stay Foolish"?</h2>
+        
+        <p>Because most of the things I've learned started with being wrong.</p>
+        
+        <p>This blog is a space to:</p>
+        <ul>
+            <li>Explore ideas before they're clean and polished</li>
+            <li>Document learnings that might help future me (or future you)</li>
+            <li>Think in public — even if that thinking evolves</li>
+        </ul>
+        
+        <h2>🏋️‍♂️ Off the keyboard</h2>
+        
+        <p>When I'm not building or learning, I'm most likely reading, daydreaming or exercising.
+            I try taking care of this meat machine because it's the only real hardware we've got.
+        </p>
+        
+        <h2>Let's talk</h2>
+        
+        <p>If you:</p>
+        <ul>
+            <li>Want to collaborate on weird ideas</li>
+            <li>Are building something cool</li>
+            <li>Think in strange, or contrarian ways</li>
+        </ul>
+        <p>Reach out. I'd love to hear from you.</p>
+    </div>
+{% endblock page_content %}
