@@ -33,3 +33,10 @@ def roadmap(request):
         "post": post,
     }
     return render(request, "blog/detail.html", context)
+
+def projects(request):
+    post = get_object_or_404(Post, page_type='navbar', title__icontains='projects')
+    context = {
+        "post": post,
+    }
+    return render(request, "blog/detail.html", context)

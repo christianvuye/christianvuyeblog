@@ -7,4 +7,5 @@ urlpatterns = [
     path("category/<slug:slug>/", views.blog_category, name="blog_category"),
     path("about/", views.about, name="blog_about"),
     path("roadmap/", views.roadmap, name="blog_roadmap"),
+    path("projects/", views.projects, name="blog_projects"),
 ]
