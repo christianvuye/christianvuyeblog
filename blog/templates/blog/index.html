@@ -92,7 +92,7 @@
                                 {% endfor %}
                             </div>
                         {% endif %}
-                        <p class="post-description">{{ post.body | slice:":150" }}...</p>
+                        <p class="post-description">{{ post.body | striptags | slice:":150" }}...</p>
                     </li>
                 {% endfor %}
             </ul>

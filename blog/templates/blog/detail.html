@@ -75,7 +75,7 @@
         {% endif %}
         
         <div class="post-content">
-            {{ post.body | linebreaks }}
+            {{ post.body | safe }}
         </div>
     </div>
 {% endblock page_content %}
