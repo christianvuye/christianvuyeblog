@@ -8,4 +8,5 @@ urlpatterns = [
     path("about/", views.about, name="blog_about"),
     path("roadmap/", views.roadmap, name="blog_roadmap"),
     path("projects/", views.projects, name="blog_projects"),
+    path("api/posts/", views.PostAPIView.as_view(), name="post_api_view"),
 ]
