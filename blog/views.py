@@ -3,6 +3,7 @@ from blog.models import Post, Category
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
+from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly
 from .serializers import PostSerializer
 
 def blog_index(request):
@@ -55,3 +56,4 @@ class PostAPIView(APIView): #obsolete because PostViewSet already covers it
 class PostViewSet(ModelViewSet):
     queryset = Post.objects.filter(page_type='post').order_by("-created_on")
     serializer_class = PostSerializer
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly] # Only admin can write, nobody else can even see the forms
