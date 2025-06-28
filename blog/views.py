@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from blog.models import Post, Category
 from rest_framework.views import APIView
+from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from .serializers import PostSerializer
 
@@ -45,8 +46,12 @@ def projects(request):
     return render(request, "blog/detail.html", context)
 
 
-class PostAPIView(APIView):
+class PostAPIView(APIView): #obsolete because PostViewSet already covers it
     def get(self, request):
         posts = Post.objects.filter(page_type='post').order_by("-created_on")
         serializer = PostSerializer(posts, many=True)
         return Response(serializer.data)
+
+class PostViewSet(ModelViewSet):
+    queryset = Post.objects.filter(page_type='post').order_by("-created_on")
+    serializer_class = PostSerializer
