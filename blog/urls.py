@@ -3,7 +3,8 @@ from . import views
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
-router.register(prefix='', viewset=views.PostViewSet)
+router.register(prefix='posts', viewset=views.PostViewSet)
+router.register(prefix='categories', viewset=views.CategoryViewSet)
 
 urlpatterns = [
     path("", views.blog_index, name="blog_index"),
@@ -12,5 +13,5 @@ urlpatterns = [
     path("about/", views.about, name="blog_about"),
     path("roadmap/", views.roadmap, name="blog_roadmap"),
     path("projects/", views.projects, name="blog_projects"),
-    path("posts/", include(router.urls)) # When using include(), you don't need the name= parameter since the router generates its own names
+    path("api/", include(router.urls)), # When using include(), you don't need the name= parameter since the router generates its own names
 ]

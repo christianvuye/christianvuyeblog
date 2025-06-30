@@ -1,10 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from blog.models import Post, Category
-from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.response import Response
 from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly
-from .serializers import PostSerializer
+from .serializers import PostSerializer, CategorySerializer
 
 def blog_index(request):
     posts = Post.objects.filter(page_type='post').order_by("-created_on")
@@ -51,3 +49,9 @@ class PostViewSet(ModelViewSet):
     queryset = Post.objects.filter(page_type='post').order_by("-created_on")
     serializer_class = PostSerializer
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly] # Only admin can write, nobody else can even see the forms
+
+
+class CategoryViewSet(ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]

@@ -1,8 +1,9 @@
 from django.db import models
+from django.core.validators import MinLengthValidator
 from django_ckeditor_5.fields import CKEditor5Field
 
 class Category(models.Model):
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=30, validators=[MinLengthValidator(2)])
     slug = models.SlugField(max_length=30, unique=True)
 
     class Meta:
@@ -12,7 +13,7 @@ class Category(models.Model):
         return self.name
 
 class Post(models.Model):
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255, validators=[MinLengthValidator(2)])
     body = CKEditor5Field('Text', config_name='default')
     created_on = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
