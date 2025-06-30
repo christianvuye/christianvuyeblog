@@ -47,12 +47,6 @@ def projects(request):
     return render(request, "blog/detail.html", context)
 
 
-class PostAPIView(APIView): #obsolete because PostViewSet already covers it
-    def get(self, request):
-        posts = Post.objects.filter(page_type='post').order_by("-created_on")
-        serializer = PostSerializer(posts, many=True)
-        return Response(serializer.data)
-
 class PostViewSet(ModelViewSet):
     queryset = Post.objects.filter(page_type='post').order_by("-created_on")
     serializer_class = PostSerializer
